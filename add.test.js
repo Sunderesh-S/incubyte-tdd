@@ -47,3 +47,25 @@ describe('Add - Unknown Amount of Numbers', () => {
         expect(Add('0,0,0,0')).toBe(0);
     });
 });
+
+describe('Add - New Lines as Delimiters', () => {
+    test('returns 6 for "1\\n2,3"', () => {
+        expect(Add('1\n2,3')).toBe(6);
+    });
+
+    test('returns 10 for "1\\n2\\n3,4"', () => {
+        expect(Add('1\n2\n3,4')).toBe(10);
+    });
+
+    test('returns 1 for "1,\\n" (invalid input)', () => {
+        expect(Add('1,\n')).toBe(1);
+    });
+
+    test('returns 3 for "1\\n,2" (invalid input)', () => {
+        expect(Add('1\n,2')).toBe(3);
+    });
+
+    test('returns 0 for "\\n" (invalid input)', () => {
+        expect(Add('\n')).toBe(0);
+    });
+});
