@@ -71,31 +71,31 @@ describe('Add - New Lines as Delimiters', () => {
 });
 
 describe('Add - Custom Delimiters', () => {
-    test('returns 3 for "//;\n1;2"', () => {
+    test('returns 3 for "//;\\n1;2"', () => {
         expect(Add('//;\n1;2')).toBe(3);
     });
 
-    test('returns 6 for "//|\n1|2|3"', () => {
+    test('returns 6 for "//|\\n1|2|3"', () => {
         expect(Add('//|\n1|2|3')).toBe(6);
     });
 
-    test('returns 10 for "//-\n1-2-3-4"', () => {
+    test('returns 10 for "//-\\n1-2-3-4"', () => {
         expect(Add('//-\n1-2-3-4')).toBe(10);
     });
 
-    test('returns 1 for "//;\n1;\n" (invalid input)', () => {
+    test('returns 1 for "//;\\n1;\\n" (invalid input)', () => {
         expect(Add('//;\n1;\n')).toBe(1);
     });
 
-    test('returns 3 for "//;\n1;2;\n" (invalid input)', () => {
+    test('returns 3 for "//;\\n1;2;\\n" (invalid input)', () => {
         expect(Add('//;\n1;2;\n')).toBe(3);
     });
 
-    test('returns 0 for "\n" (invalid input)', () => {
+    test('returns 0 for "\\n" (invalid input)', () => {
         expect(Add('\n')).toBe(0);
     });
 
-    test('returns 0 for "//;\n" (invalid input)', () => {
+    test('returns 0 for "//;\\n" (invalid input)', () => {
         expect(Add('//;\n')).toBe(0);
     });
 });
@@ -109,19 +109,19 @@ describe('Add - Negative Numbers', () => {
         expect(() => Add('-1,-2,-3')).toThrow('Negatives not allowed: -1, -2, -3');
     });
 
-    test('throws an exception for "//;\n-1;2;-3"', () => {
+    test('throws an exception for "//;\\n-1;2;-3"', () => {
         expect(() => Add('//;\n-1;2;-3')).toThrow('Negatives not allowed: -1, -3');
     });
 
-    test('throws an exception for "1,\n-2" (invalid input)', () => {
+    test('throws an exception for "1,\\n-2" (invalid input)', () => {
         expect(() => Add('1,\n-2')).toThrow('Negatives not allowed: -2');
     });
 
-    test('throws an exception for "//;\n1;\n-2" (invalid input)', () => {
+    test('throws an exception for "//;\\n1;\\n-2" (invalid input)', () => {
         expect(() => Add('//;\n1;\n-2')).toThrow('Negatives not allowed: -2');
     });
 
-    test('throws an exception for "//;\n-1;\n" (invalid input)', () => {
+    test('throws an exception for "//;\\n-1;\\n" (invalid input)', () => {
         expect(() => Add('//;\n-1;\n')).toThrow('Negatives not allowed: -1');
     });
 });
@@ -139,43 +139,43 @@ describe('Add - Ignore Numbers Greater Than 1000', () => {
         expect(Add('1001,2002')).toBe(0);
     });
 
-    test('returns 1 for "1,\n1001" (invalid input)', () => {
+    test('returns 1 for "1,\\n1001" (invalid input)', () => {
         expect(Add('1,\n1001')).toBe(1);
     });
 
-    test('returns 3 for "//;\n1;1001;\n2" (invalid input)', () => {
+    test('returns 3 for "//;\\n1;1001;\\n2" (invalid input)', () => {
         expect(Add('//;\n1;1001;\n2')).toBe(3);
     });
 
-    test('returns 0 for "//;\n1001;\n" (invalid input)', () => {
+    test('returns 0 for "//;\\n1001;\\n" (invalid input)', () => {
         expect(Add('//;\n1001;\n')).toBe(0);
     });
 });
 
 describe('Add - Delimiters of Any Length', () => {
-    test('returns 6 for "//[***]\n1***2***3"', () => {
+    test('returns 6 for "//[***]\\n1***2***3"', () => {
         expect(Add('//[***]\n1***2***3')).toBe(6);
     });
 
-    test('returns 10 for "//[----]\n1----2----3----4"', () => {
+    test('returns 10 for "//[----]\\n1----2----3----4"', () => {
         expect(Add('//[----]\n1----2----3----4')).toBe(10);
     });
 
-    test('returns 3 for "//[+]\n1+2"', () => {
+    test('returns 3 for "//[+]\\n1+2"', () => {
         expect(Add('//[+]\n1+2')).toBe(3);
     });
 });
 
 describe('Add - Multiple Delimiters', () => {
-    test('returns 6 for "//[*][%]\n1*2%3"', () => {
+    test('returns 6 for "//[*][%]\\n1*2%3"', () => {
         expect(Add('//[*][%]\n1*2%3')).toBe(6);
     });
 
-    test('returns 10 for "//[**][%%]\n1**2%%3**4"', () => {
+    test('returns 10 for "//[**][%%]\\n1**2%%3**4"', () => {
         expect(Add('//[**][%%]\n1**2%%3**4')).toBe(10);
     });
 
-    test('returns 15 for "//[+][-]\n1+2-3+4-5"', () => {
+    test('returns 15 for "//[+][-]\\n1+2-3+4-5"', () => {
         expect(Add('//[+][-]\n1+2-3+4-5')).toBe(15);
     });
 });
