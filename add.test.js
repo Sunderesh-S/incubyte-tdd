@@ -33,3 +33,17 @@ describe('Add - Two Numbers', () => {
         expect(Add('50,50')).toBe(100);
     });
 });
+
+describe('Add - Unknown Amount of Numbers', () => {
+    test('returns 15 for "1,2,3,4,5"', () => {
+        expect(Add('1,2,3,4,5')).toBe(15);
+    });
+
+    test('returns 6 for "1,2,3"', () => {
+        expect(Add('1,2,3')).toBe(6);
+    });
+
+    test('returns 0 for "0,0,0,0"', () => {
+        expect(Add('0,0,0,0')).toBe(0);
+    });
+});
