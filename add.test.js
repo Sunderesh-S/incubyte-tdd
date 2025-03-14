@@ -19,3 +19,17 @@ describe('Add - Single Number', () => {
         expect(Add('10')).toBe(10);
     });
 });
+
+describe('Add - Two Numbers', () => {
+    test('returns 3 for "1,2"', () => {
+        expect(Add('1,2')).toBe(3);
+    });
+
+    test('returns 10 for "4,6"', () => {
+        expect(Add('4,6')).toBe(10);
+    });
+
+    test('returns 100 for "50,50"', () => {
+        expect(Add('50,50')).toBe(100);
+    });
+});
