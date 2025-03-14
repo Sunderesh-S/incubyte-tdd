@@ -6,18 +6,23 @@ function Add(input = "") {
     // Default delimiter: comma or newline
     let delimiter = /[\n,]+/;
 
-    // Check for a custom delimiter at the beginning of the string
     let customDelimiterMatch = input.match(/^\/\/(\[.*\]|\S)\n/);
     if (customDelimiterMatch) {
         let customDelimiter = customDelimiterMatch[1];
 
         if (customDelimiter.startsWith("[") && customDelimiter.endsWith("]")) {
-            // Extract multi-character delimiters inside brackets
-            customDelimiter = customDelimiter.slice(1, -1);
-        }
+            // Extract multiple delimiters inside brackets
+            let delimiters = [...customDelimiter.matchAll(/\[(.*?)\]/g)].map(m => m[1]);
 
-        // Convert special characters in the delimiter to a valid regex
-        delimiter = new RegExp(customDelimiter.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), "g");
+            // Escape special regex characters for each delimiter
+            let escapedDelimiters = delimiters.map(d => d.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+
+            // Join them with "|" (OR) to create a regex pattern
+            delimiter = new RegExp(escapedDelimiters.join("|"), "g");
+        } else {
+            // Single-character delimiter case
+            delimiter = new RegExp(customDelimiter.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), "g");
+        }
 
         // Remove delimiter definition from input
         input = input.slice(customDelimiterMatch[0].length);
@@ -37,6 +42,3 @@ function Add(input = "") {
 }
 
 module.exports = { Add };
-
-
-console.log(Add('//[***]\n1***2***3'))

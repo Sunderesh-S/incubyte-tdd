@@ -165,3 +165,17 @@ describe('Add - Delimiters of Any Length', () => {
         expect(Add('//[+]\n1+2')).toBe(3);
     });
 });
+
+describe('Add - Multiple Delimiters', () => {
+    test('returns 6 for "//[*][%]\n1*2%3"', () => {
+        expect(Add('//[*][%]\n1*2%3')).toBe(6);
+    });
+
+    test('returns 10 for "//[**][%%]\n1**2%%3**4"', () => {
+        expect(Add('//[**][%%]\n1**2%%3**4')).toBe(10);
+    });
+
+    test('returns 15 for "//[+][-]\n1+2-3+4-5"', () => {
+        expect(Add('//[+][-]\n1+2-3+4-5')).toBe(15);
+    });
+});
