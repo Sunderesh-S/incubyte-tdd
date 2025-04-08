@@ -1,5 +1,6 @@
 function Add(input = "") {
     // Handle empty input
+	// not required just for testing
     if (!input.trim())
         return 0;
 
